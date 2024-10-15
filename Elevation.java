@@ -8,6 +8,26 @@ public class Elevation {
     private double _longitude;
     private int _height;
     
+    // Конструктор по умолчанию
+    public Elevation() {
+        this._name = "";
+        this._age = 0;
+        this._country = "";
+        this._latitude = 0.0;
+        this._longitude = 0.0;
+        this._height = 0;
+    }
+    
+    // Конструктор с параметрами
+    public Elevation(String name, int age, String country, double latitude, double longitude, int height) {
+        this._name = name;
+        this._age = age;
+        this._country = country;
+        this._latitude = latitude;
+        this._longitude = longitude;
+        this._height = height;
+    }
+    
     // Геттер для _name
     public String getName() {
         return _name;

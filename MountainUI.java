@@ -96,11 +96,13 @@ public class MountainUI {
     }
 
     private void addMountain(Scanner scanner) {
+        System.out.println("Введите номер типа: 1.Возвышенность  2.Гора  3.Вулкан");
+        String type = scanner.nextLine();
         System.out.println("Введите имя горы:");
         String name = scanner.nextLine();
         System.out.println("Введите возраст горы:");
         int age = scanner.nextInt();
-        scanner.nextLine(); // Потребляем символ новой строки
+        scanner.nextLine(); 
         System.out.println("Введите страну:");
         String country = scanner.nextLine();
         System.out.println("Введите широту:");
