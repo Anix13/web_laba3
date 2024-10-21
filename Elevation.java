@@ -1,12 +1,18 @@
 package lb3tareevamiroshnichencko;
 
+import java.util.Scanner;
+
+
 public class Elevation {
+    final int ELEVATION_ID = 1;
     private String _name;
     private int _age;
     private String _country;
     private double _latitude;
     private double _longitude;
     private int _height;
+    protected int _idClass;
+    
     
     // Конструктор по умолчанию
     public Elevation() {
@@ -16,6 +22,7 @@ public class Elevation {
         this._latitude = 0.0;
         this._longitude = 0.0;
         this._height = 0;
+        this._idClass = ELEVATION_ID;
     }
     
     // Конструктор с параметрами
@@ -26,6 +33,7 @@ public class Elevation {
         this._latitude = latitude;
         this._longitude = longitude;
         this._height = height;
+        this._idClass = ELEVATION_ID;
     }
     
     // Геттер для _name
@@ -58,6 +66,11 @@ public class Elevation {
         return _height;
     }
     
+    // Геттер для _idClass
+    public int getIdClass() {
+        return _idClass;
+    }
+    
     // Сеттер для _name
     public void setName(String value) {
         this._name = value;
@@ -88,21 +101,67 @@ public class Elevation {
         this._height = value;
     }
     
-    //Метод про проверки высота больше 1000(1000 изменить на константу или перерменкой из функций для массива   )
+    //Метод про проверки высота больше 1000(1000 изменить на константу или переменной из функций для массива   )
     public boolean isMoreThousandHeight(){
         if(_height>1000){
             return true;
         }
         return false;     
     }
+    public void updateElevation(Scanner scanner){
+        System.out.println("Выберите поле для обновления:");
+        System.out.println("1. Название");
+        System.out.println("2. Возраст");
+        System.out.println("3. Страна");
+        System.out.println("4. Широта");
+        System.out.println("5. Долгота");
+        System.out.println("6. Высота");
+
+        int fieldOption = scanner.nextInt();
+        scanner.nextLine(); // Потребляем символ новой строки
+
+        switch (fieldOption) {
+            case 1:
+                System.out.println("Введите новое название:");
+                String newName = scanner.nextLine();
+                this.setName(newName);
+                break;
+            case 2:
+                System.out.println("Введите новый возраст:");
+                this.setAge(scanner.nextInt());
+                break;
+            case 3:
+                System.out.println("Введите новую страну:");
+                String newCountry = scanner.nextLine();
+                this.setCountry(newCountry);
+                break;
+            case 4:
+                System.out.println("Введите новую широту:");
+                this.setLatitude(scanner.nextDouble());
+                break;
+            case 5:
+                System.out.println("Введите новую долготу:");
+                this.setLongitude(scanner.nextDouble());
+                break;
+            case 6:
+                System.out.println("Введите новую высоту:");
+                this.setHeight(scanner.nextInt());
+                break;
+            default:
+                System.out.println("Неверный выбор.");
+        }
+        
+        System.out.println("Информация о горе успешно обновлена.");
+    
+    }
     
     public void printInfo() {
         System.out.println("Имя: " + _name +
-                           ", Высота: " + _height +
-                           ", Возраст: " + _age +
-                           ", Страна: " + _country +
-                           ", Широта: " + _latitude +
-                           ", Долгота: " + _longitude);
+                           ",\n Высота: " + _height +
+                           ",\n Возраст: " + _age +
+                           ",\n Страна: " + _country +
+                           ",\n Широта: " + _latitude +
+                           ",\n Долгота: " + _longitude);
     }
 
      
