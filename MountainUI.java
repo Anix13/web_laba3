@@ -1,9 +1,6 @@
 package lb3tareevamiroshnichencko;
 
-
 import java.util.Scanner;
-import java.util.InputMismatchException;
-
 
 public class MountainUI {
     private MountainArray mountainArray;
@@ -13,8 +10,8 @@ public class MountainUI {
     }
 
     public void start() {
-
-        Elevation peak1 = new Elevation();
+        
+       Elevation peak1 = new Elevation();
         peak1.setName("Эльбрус");
         peak1.setHeight(5642);
         peak1.setCountry("Россия");
@@ -54,8 +51,8 @@ public class MountainUI {
         mountainArray.addMountain(mountain1);
         mountainArray.addMountain(volcano1);
         mountainArray.addMountain(volcano2);
-
-
+        
+        
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("Выберите опцию:");
@@ -67,97 +64,66 @@ public class MountainUI {
             System.out.println("6. Вывести информацию о всех вершинах");
             System.out.println("7. Выйти");
 
-            try {
-                int option = scanner.nextInt();
-                scanner.nextLine(); // Потребляем символ новой строки
+            int option = scanner.nextInt();
+            scanner.nextLine(); // Потребляем символ новой строки
 
-                switch (option) {
-                    case 1:
-                        addMountain(scanner);
-                        break;
-                    case 2:
-                        getHighestMountain();
-                        break;
-                    case 3:
-                        getMountainsOver1000();
-                        break;
-                    case 4:
-                        sortMountains();
-                        break;
-                    case 5:
-                        updateMountains(scanner);
-                        break;
-                    case 6:
-                        printAllMountains();
-                        break;
-                    case 7:
-                        System.out.println("Выход...");
-                        return;
-                    default:
-                        System.out.println("Неверный выбор, попробуйте снова.");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Неверный выбор, попробуйте снова.");
-                scanner.nextLine(); // Очищаем буфер после ошибки
+            switch (option) {
+                case 1:
+                    addMountain(scanner);
+                    break;
+                case 2:
+                    getHighestMountain();
+                    break;
+                case 3:
+                    getMountainsOver1000();
+                    break;
+                case 4:
+                    sortMountains();
+                    break;
+                case 5:
+                    updateMountain(scanner);
+                    break;
+                case 6:
+                    printAllMountains();
+                    break;
+                case 7:
+                    System.out.println("Выход...");
+                    return;
+                default:
+                    System.out.println("Неверный выбор, попробуйте снова.");
             }
         }
     }
 
     private void addMountain(Scanner scanner) {
-    System.out.println("Введите номер типа: 1.Возвышенность  2.Гора  3.Вулкан");
-    String type = scanner.nextLine();
-    
-    System.out.println("Введите имя:");
-    String name = scanner.nextLine();
-    
-    System.out.println("Введите возраст:");
-    int age = scanner.nextInt();
-    scanner.nextLine(); // Потребляем символ новой строки
-    
-    System.out.println("Введите страну:");
-    String country = scanner.nextLine();
-    
-    System.out.println("Введите широту:");
-    double latitude = scanner.nextDouble();
-    
-    System.out.println("Введите долготу:");
-    double longitude = scanner.nextDouble();
-    
-    System.out.println("Введите высоту:");
-    int height = scanner.nextInt();
-    scanner.nextLine(); // Потребляем символ новой строки
+        System.out.println("Введите номер типа: 1.Возвышенность  2.Гора  3.Вулкан");
+        String type = scanner.nextLine();
+        System.out.println("Введите имя горы:");
+        String name = scanner.nextLine();
+        System.out.println("Введите возраст горы:");
+        int age = scanner.nextInt();
+        scanner.nextLine(); 
+        System.out.println("Введите страну:");
+        String country = scanner.nextLine();
+        System.out.println("Введите широту:");
+        double latitude = scanner.nextDouble();
+        System.out.println("Введите долготу:");
+        double longitude = scanner.nextDouble();
+        System.out.println("Введите высоту:");
+        int height = scanner.nextInt();
+        scanner.nextLine(); // Потребляем символ новой строки
 
-    if (type.equals("1")) {
-        // Elevation
-        Elevation elevation = new Elevation(name, age, country, latitude, longitude, height);
-        mountainArray.addMountain(elevation);
-        System.out.println("Возвышенность добавлена.");
-        
-    } else if (type.equals("2")||type.equals("3")) {
-        // Mountain
-        System.out.println("Введите, было ли восхождение (true/false):");
-        boolean isClimbed = scanner.nextBoolean();
-        Mountain mountain = new Mountain(name, age, country, latitude, longitude, height, isClimbed);
+        Elevation mountain = new Elevation();
+        mountain.setName(name);
+        mountain.setAge(age);
+        mountain.setCountry(country);
+        mountain.setLatitude(latitude);
+        mountain.setLongitude(longitude);
+        mountain.setHeight(height);
+
         mountainArray.addMountain(mountain);
         System.out.println("Гора добавлена.");
-        
-    if (type.equals("3")) {
-        // Volcano
-        System.out.println("Введите год последнего извержения:");
-        int lastErmulationYear = scanner.nextInt();
-        System.out.println("Введите, активен ли вулкан (true/false):");
-        boolean isActive = scanner.nextBoolean();
-        Volcano volcano = new Volcano(name, age, country, latitude, longitude, height, isClimbed, lastErmulationYear, isActive);
-        mountainArray.addMountain(volcano);
-        System.out.println("Вулкан добавлен.");
-        
     }
-    }else {
-        System.out.println("Неверный тип.");
-    }
-    
-}
-
 
     private void getHighestMountain() {
         Elevation highestMountain = mountainArray.getHighestMountain();
@@ -185,53 +151,16 @@ public class MountainUI {
         System.out.println("Горы отсортированы по высоте.");
     }
 
-    private void updateMountains(Scanner scanner) {
-
-        int index;
-        System.out.println("Введите название горы, которую хотите обновить:");
+    private void updateMountain(Scanner scanner) {
+        System.out.println("Введите имя горы для обновления:");
         String name = scanner.nextLine();
-
-        Elevation mountain = mountainArray.getMountains().stream()
-            .filter(m -> m.getName().equalsIgnoreCase(name))
-            .findFirst()
-            .orElse(null);
-
-        if (mountain == null) {
-            System.out.println("Гора не найдена.");
-            return;
-        }
-        try {
-            int type = mountain.getIdClass(); 
-            
-            switch (type) {
-                case 1:
-                    mountain.updateElevation(scanner);;
-                    break;
-                case 2:
-                    Mountain mountain_1 = (Mountain)mountain;
-                    mountain_1.updateMountain(scanner);
-                    break;
-                case 3:
-                    Volcano mountain_2 = (Volcano)mountain;
-                    mountain_2.updateVolcano(scanner);
-                    break;
-                
-            }
-            
-            
-        } catch (InputMismatchException e) {
-            System.out.println("Ошибка ввода, пожалуйста, введите целое число для высоты.");
-            scanner.nextLine(); // Очистка буфера в случае ошибки
-        }
-    
-        System.out.println("Обновленная информация:");
-        mountain.printInfo(); // Используем метод printInfo 
+        System.out.println("Введите новую страну:");
+        String newCountry = scanner.nextLine();
+        mountainArray.updateMountainByName(name, newCountry);
     }
-    
-    
+
     private void printAllMountains() {
         mountainArray.printAllMountains();
-        
     }
 
 }

@@ -11,19 +11,6 @@ public class MountainArray {
         this.mountains = new ArrayList<>();
     }
 
-    public List<Elevation> getMountains(){
-        return mountains;
-    }
-    
-    // Геттер для получения горы по индексу
-    public Elevation getMountainByIndex(int index) {
-        if (index >= 0 && index < mountains.size()) {
-            return mountains.get(index);
-        }
-        return null;
-    }
-    
-    
     // Метод для добавления новой горы
     public void addMountain(Elevation mountain) {
         mountains.add(mountain);
@@ -51,14 +38,24 @@ public class MountainArray {
     public void sortMountainsByHeight() {
         mountains.sort(Comparator.comparingInt(Elevation::getHeight));
     }
-    
-    
+
+    // Поиск по названию вершины и изменение одного из полей
+    public void updateMountainByName(String name, String newCountry) {
+        for (Elevation mountain : mountains) {
+            if (mountain.getName().equalsIgnoreCase(name)) {
+                mountain.setCountry(newCountry);
+                System.out.println("Обновленная информация о горе " + name + ":");
+                mountain.printInfo(); // Используем метод printInfo
+                return;
+            }
+        }
+        System.out.println("Гора с именем " + name + " не найдена.");
+    }
 
     // Вывод всей информации о вершинах
     public void printAllMountains() {
         for (Elevation mountain : mountains) {
             mountain.printInfo(); // Используем метод printInfo
-            
         }
     }
 }
